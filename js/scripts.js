@@ -86,7 +86,7 @@
 		autoPlay : true,
 		singleItem : true,
 		pagination: true,
-		navigation: false,
+		navigation: false
 	});
 	// AJAX project slider
 	$(document).ajaxComplete(function(){
@@ -102,7 +102,7 @@
 		singleItem : true,
 		pagination: true,
 		navigation: false,
-		navigationText : ['<i class="icon ion-chevron-left"></i>','<i class="icon ion-chevron-right"></i>'],
+		navigationText : ['<i class="icon ion-chevron-left"></i>','<i class="icon ion-chevron-right"></i>']
 	});
 	/* -------------------
 	Parallax Sections
@@ -128,25 +128,29 @@
 	/* -------------------
 	Google map
 	---------------------*/
-	$("#map").gmap3({
-		marker:{
-		address:"44 W 66th St, New York, NY",
-		options:{ icon: "img/assets/marker.png"}},
-		map:{
-		options:{
-		styles: [ {
-		stylers: [ { "saturation":-90 }, { "lightness": 0 }, { "gamma": 0.0 }]},
-		],
-		zoom: 13,
-		scrollwheel:false,
-		draggable: true }
-		}
-	});
+    $("#map").gmap3({
+        marker: {
+            address: "Krasnodar 350901  61",
+            options: {icon: "img/favicon.ico"},
+            position: [45.052274,39.0168696]
+        },
+        map: {
+            options: {
+                styles: [{
+                    stylers: [{"saturation": -90}, {"lightness": 0}, {"gamma": 0.0}]
+                }
+                ],
+                zoom: 16,
+                scrollwheel: false,
+                draggable: true
+            }
+        }
+    });
 	/* -------------------
 	Twitter Feed
 	---------------------*/
 	$('.tweet').twittie({
-		username: 'VossenDesign',
+		username: 'InstaLife',
 		dateFormat: '%b. %d, %Y',
 		template: '{{tweet}} <div class="date">{{date}}</div>',
 		count: 2,
@@ -288,7 +292,7 @@
 				name: $('#name').val(),
 				email: $('#email').val(),
 				subject: $('#subject').val(),
-				comments: $('#comments').val(),
+				comments: $('#comments').val()
 			},
 				function(data){
 					document.getElementById('message').innerHTML = data;
@@ -330,7 +334,7 @@
 						$alert.addClass( 'alert-success' ).fadeIn( 500 );
 					}
 					$submit.button( 'reset' );
-				},
+				}
 			})
 		});
 	});
@@ -366,153 +370,55 @@
 
 })(jQuery);
 
-/* -------------------
-Portfolio
- ---------------------*/
-(function($, window, document, undefined) {
-	"use strict";
-
-	var gridContainer = $('#grid-container-fullwidth'),
-		filtersContainer = $('#filters-container-fullwidth'),
-		wrap, filtersCallback;
-
-	gridContainer.cubeportfolio({
-		defaultFilter: '*',
-		animationType: 'slideDelay',
-		gapHorizontal: 15,
-		gapVertical: 15,
-		gridAdjustment: 'responsive',
-		caption: 'zoom',
-		displayType: 'lazyLoading',
-		displayTypeSpeed: 100,
-		// lightbox
-		lightboxDelegate: '.cbp-lightbox',
-		lightboxGallery: true,
-		lightboxTitleSrc: 'data-title',
-		lightboxCounter: '<div class="cbp-popup-lightbox-counter">{{current}} of {{total}}</div>',
-		// singlePage popup
-		singlePageDelegate: '.cbp-singlePage',
-		singlePageDeeplinking: true,
-		singlePageStickyNavigation: true,
-		singlePageCounter: '<div class="cbp-popup-singlePage-counter">{{current}} of {{total}}</div>',
-		singlePageCallback: function(url, element) {
-			// to update singlePage content use the following method: this.updateSinglePage(yourContent)
-			var t = this;
-			$.ajax({
-				url: url,
-				type: 'GET',
-				dataType: 'html',
-				timeout: 5000
-			})
-				.done(function(result) {
-					t.updateSinglePage(result);
-				})
-				.fail(function() {
-					t.updateSinglePage("Error! Please refresh the page!");
-				});
-		},
-		// single page inline
-		singlePageInlineDelegate: '.cbp-singlePageInline',
-		singlePageInlinePosition: 'above',
-		singlePageInlineInFocus: true,
-		singlePageInlineCallback: function(url, element) {
-			// to update singlePage Inline content use the following method: this.updateSinglePageInline(yourContent)
-		}
-	});
-	/* add listener for filters */
-	if (filtersContainer.hasClass('cbp-l-filters-dropdown')) {
-		wrap = filtersContainer.find('.cbp-l-filters-dropdownWrap');
-		wrap.on({
-			'mouseover.cbp': function() {
-				wrap.addClass('cbp-l-filters-dropdownWrap-open');
-			},
-			'mouseleave.cbp': function() {
-				wrap.removeClass('cbp-l-filters-dropdownWrap-open');
-			}
-		});
-		filtersCallback = function(me) {
-			wrap.find('.cbp-filter-item').removeClass('cbp-filter-item-active');
-			wrap.find('.cbp-l-filters-dropdownHeader').text(me.text());
-			me.addClass('cbp-filter-item-active');
-			wrap.trigger('mouseleave.cbp');
-		};
-	} else {
-		filtersCallback = function(me) {
-			me.addClass('cbp-filter-item-active').siblings().removeClass('cbp-filter-item-active');
-		};
-	}
-	filtersContainer.on('click.cbp', '.cbp-filter-item', function() {
-		var me = $(this);
-		if (me.hasClass('cbp-filter-item-active')) {
-			return;
-		}
-		// get cubeportfolio data and check if is still animating (reposition) the items.
-		if (!$.data(gridContainer[0], 'cubeportfolio').isAnimating) {
-			filtersCallback.call(null, me);
-		}
-		// filter the items
-		gridContainer.cubeportfolio('filter', me.data('filter'), function() {});
-	});
-	/* activate counter for filters */
-	gridContainer.cubeportfolio('showCounter', filtersContainer.find('.cbp-filter-item'), function() {
-		// read from url and change filter active
-		var match = /#cbpf=(.*?)([#|?&]|$)/gi.exec(location.href),
-			item;
-		if (match !== null) {
-			item = filtersContainer.find('.cbp-filter-item').filter('[data-filter="' + match[1] + '"]');
-			if (item.length) {
-				filtersCallback.call(null, item);
-			}
-		}
-	});
-	/* add listener for load more */
-	$('.cbp-l-loadMore-button-link').on('click.cbp', function(e) {
-		e.preventDefault();
-		var clicks, me = $(this),
-			oMsg;
-		if (me.hasClass('cbp-l-loadMore-button-stop')) {
-			return;
-		}
-		// get the number of times the loadMore link has been clicked
-		clicks = $.data(this, 'numberOfClicks');
-		clicks = (clicks) ? ++clicks : 1;
-		$.data(this, 'numberOfClicks', clicks);
-		// set loading status
-		oMsg = me.text();
-		me.text('LOADING...');
-		// perform ajax request
-		$.ajax({
-			url: me.attr('href'),
-			type: 'GET',
-			dataType: 'HTML'
-		}).done(function(result) {
-			var items, itemsNext;
-			// find current container
-			items = $(result).filter(function() {
-				return $(this).is('div' + '.cbp-loadMore-block' + clicks);
-			});
-			gridContainer.cubeportfolio('appendItems', items.html(),
-				function() {
-					// put the original message back
-					me.text(oMsg);
-					// check if we have more works
-					itemsNext = $(result).filter(function() {
-						return $(this).is('div' + '.cbp-loadMore-block' + (clicks + 1));
-					});
-
-					if (itemsNext.length === 0) {
-						me.text('NO MORE WORKS');
-						me.addClass('cbp-l-loadMore-button-stop');
-					}
-				});
-		}).fail(function() {
-			// error
-		});
-	});
-})(jQuery, window, document);
-
-
 /*!
- * Vossen Hero YT v2.0
+ * InstaLife Hero YT v2.0
  */
-function onYouTubeIframeAPIReady(){player=new YT.Player("vossen-youtube",{width:$(window).width()+0,height:$(window).height()+0,videoId:vosVideoId,playerVars:{controls:0,showinfo:0},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function playToggle(){player.playVideo(),document.getElementById("play-toggle").innerHTML='<i class="ion-pause"></i>'}function pauseToggle(){player.pauseVideo(),document.getElementById("play-toggle").innerHTML='<i class="ion-play"></i>'}function vosResize(){var a=$(window).width()+0,b=$(window).height()+0;a/b>16/9?(player.setSize(a,a/16*9),$("#vossen-youtube").css({left:"50%"})):(player.setSize(b/9*16,b),$("#vossen-youtube").css({left:-($("#vossen-youtube").outerWidth()-a)/2}))}function onPlayerReady(){var a=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent);a?$("#play-toggle").on("click",function(){playToggle()}):playToggle(),player.mute(),vosResize(),$(window).on("resize",function(){vosResize()})}function onPlayerStateChange(a){$("#mute-toggle").on("click",function(){$(this);player.isMuted()?(player.unMute(),document.getElementById("mute-toggle").innerHTML='<i class="ion-android-volume-up"></i>'):(player.mute(),document.getElementById("mute-toggle").innerHTML='<i class="ion-android-volume-mute"></i>')}),a.data==YT.PlayerState.ENDED&&player.playVideo(),$("#play-toggle").on("click",function(){a.data==YT.PlayerState.PLAYING?pauseToggle():a.data==YT.PlayerState.PAUSED&&playToggle()})}if($("#vossen-youtube").length){var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var vosVideoId=$("#vossen-youtube").attr("data-youtube-video-id"),player}
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player("InstaLife-youtube", {
+        width: $(window).width() + 0,
+        height: $(window).height() + 0,
+        videoId: vosVideoId,
+        playerVars: {controls: 0, showinfo: 0},
+        events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange},
+    })
+}
+
+function playToggle() {
+    player.playVideo(), document.getElementById("play-toggle").innerHTML = '<i class="ion-pause"></i>'
+}
+
+function pauseToggle() {
+    player.pauseVideo(), document.getElementById("play-toggle").innerHTML = '<i class="ion-play"></i>'
+}
+
+function vosResize() {
+    var a = $(window).width() + 0, b = $(window).height() + 0;
+    a / b > 16 / 9 ? (player.setSize(a, a / 16 * 9), $("#InstaLife-youtube").css({left: "50%"})) : (player.setSize(b / 9 * 16, b), $("#InstaLife-youtube").css({left: -($("#InstaLife-youtube").outerWidth() - a) / 2}))
+}
+
+function onPlayerReady() {
+    var a = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent);
+    a ? $("#play-toggle").on("click", function () {
+        playToggle()
+    }) : playToggle(), player.mute(), vosResize(), $(window).on("resize", function () {
+        vosResize()
+    })
+}
+
+function onPlayerStateChange(a) {
+    $("#mute-toggle").on("click", function () {
+        $(this);
+        player.isMuted() ? (player.unMute(), document.getElementById("mute-toggle").innerHTML = '<i class="ion-android-volume-up"></i>') : (player.mute(), document.getElementById("mute-toggle").innerHTML = '<i class="ion-android-volume-mute"></i>')
+    }), a.data == YT.PlayerState.ENDED && player.playVideo(), $("#play-toggle").on("click", function () {
+        a.data == YT.PlayerState.PLAYING ? pauseToggle() : a.data == YT.PlayerState.PAUSED && playToggle()
+    })
+}
+
+if ($("#InstaLife-youtube").length) {
+    var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var vosVideoId = $("#InstaLife-youtube").attr("data-youtube-video-id"), player
+}
+
