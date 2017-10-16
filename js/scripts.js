@@ -47,32 +47,6 @@
 		hideBulletsOnMobile: "off",
 		hideArrowsOnMobile: "off"
 	});
-	$('.tp-banner-video').show().revolution({
-		dottedOverlay: "none",
-		delay: 9000,
-		startheight: 700,
-		hideTimerBar: "on",
-		navigationType: "none",
-		navigationStyle: "preview4",
-		touchenabled: "on",
-		swipe_velocity: 0.7,
-		swipe_min_touches: 1,
-		swipe_max_touches: 1,
-		drag_block_vertical: false,
-		keyboardNavigation: "on",
-		fullScreen: "on",
-		spinner: "spinner1",
-		stopLoop: "off",
-		stopAfterLoops: -1,
-		stopAtSlide: -1,
-		forceFullWidth: "off",
-		fullScreenAlignForce: "off",
-		minFullScreenHeight: "400",
-		hideThumbsOnMobile: "off",
-		hideNavDelayOnMobile: 1500,
-		hideBulletsOnMobile: "off",
-		hideArrowsOnMobile: "off"
-	});
 	/* -------------------
 	Owl Slider callings
 	---------------------*/
@@ -126,36 +100,7 @@
 		new WOW().init();
 	}
 	/* -------------------
-	Google map
-	---------------------*/
-    $("#map").gmap3({
-        marker: {
-            address: "Krasnodar 350901  61",
-            options: {icon: "img/favicon.ico"},
-            position: [45.052274,39.0168696]
-        },
-        map: {
-            options: {
-                styles: [{
-                    stylers: [{"saturation": -90}, {"lightness": 0}, {"gamma": 0.0}]
-                }
-                ],
-                zoom: 16,
-                scrollwheel: false,
-                draggable: true
-            }
-        }
-    });
 	/* -------------------
-	Twitter Feed
-	---------------------*/
-	$('.tweet').twittie({
-		username: 'InstaLife',
-		dateFormat: '%b. %d, %Y',
-		template: '{{tweet}} <div class="date">{{date}}</div>',
-		count: 2,
-		hideReplies: true
-	});
 	/* -------------------
 	Animated progress bars
 	---------------------*/
@@ -178,12 +123,6 @@
 	/* -------------------
 	Video section lightbox
 	---------------------*/
-	$('#video-lightbox').cubeportfolio({
-		gridAdjustment: 'alignCenter',
-		lightboxDelegate: '.cbp-lightbox',
-		lightboxGallery: true,
-		lightboxShowCounter: false
-	});
 	/* -------------------
 	Scroll functions
 	---------------------*/
@@ -422,3 +361,18 @@ if ($("#InstaLife-youtube").length) {
     var vosVideoId = $("#InstaLife-youtube").attr("data-youtube-video-id"), player
 }
 
+//Google Map
+var map;
+function initMap() {
+    var myPosition = {lat: 45.052293701272134, lng:39.017213601619005};
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: myPosition,
+        zoom: 18
+    });
+    var image = 'img/favicon.ico';
+    var beachMarker = new google.maps.Marker({
+        position: myPosition,
+        map: map,
+        icon: image
+    });
+}
