@@ -303,12 +303,31 @@
 		});
 	});
 	$('#myTab a').click(function (e) {
-	  e.preventDefault()
+	  e.preventDefault();
 	  $(this).tab('show')
-	})
+	});
+
+
+    $(document).ready(function($){
+        var iframe = $('iframe');
+        iframe.iframeTracker({
+            blurCallback: function(){
+                setInterval(function(){
+                    if (iframe.width()!== window.innerWidth && iframe !== window.innerHeight) {
+                        console.log('screen');
+                        $('nav').css('display','block')
+                    }else{
+                        console.log('fullscreen');
+                        $('nav').css('display','none')
+                    }
+                }, 500);
+            }
+        });
+    });
+
+
 
 })(jQuery);
-
 /*!
  * InstaLife Hero YT v2.0
  */
@@ -316,7 +335,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player("InstaLife-youtube", {
         width: $(window).width() + 0,
         height: $(window).height() + 0,
-        videoId: vosVideoId,
+        videoId: instaLife,
         playerVars: {controls: 0, showinfo: 0},
         events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange},
     })
@@ -341,7 +360,10 @@ function onPlayerReady() {
         playToggle()
     }) : playToggle(), player.mute(), vosResize(), $(window).on("resize", function () {
         vosResize()
-    })
+    });
+    $("#fullScreen").on("click", function () {
+       console.log('fullclick');
+    });
 }
 
 function onPlayerStateChange(a) {
@@ -358,7 +380,7 @@ if ($("#InstaLife-youtube").length) {
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName("script")[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var vosVideoId = $("#InstaLife-youtube").attr("data-youtube-video-id"), player
+    var instaLife = $("#InstaLife-youtube").attr("data-youtube-video-id"), player
 }
 
 //Google Map
@@ -375,4 +397,15 @@ function initMap() {
         map: map,
         icon: image
     });
+}
+
+
+function isVideoInFullscreen() {
+    var iframe = document.querySelector('iframe');
+    var one = 1;
+    setInterval(function () {
+        one++;
+        console.log(one);
+    }, 1000);
+
 }

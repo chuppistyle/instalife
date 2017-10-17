@@ -50,7 +50,7 @@ Table of Contents:
 }
 @font-face {
     font-family: Proxima Nova Regular;
-    src: url(../fonts/ProximaNova-Regular.otf);
+    src: url(../fonts/ProximaNova-Reg.otf);
 }
 @font-face {
     font-family: Proxima Nova Bold;
@@ -1166,7 +1166,7 @@ nav {
 #about {
     padding-top: 60px;
     padding-bottom: 60px;
-    z-index: 100;
+    z-index: 100 !important;
 }
 .about-text {
     margin-top: 20px;
@@ -2041,6 +2041,8 @@ acronym {
 #map {
     height:480px;
     width:100%;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 
 /*----- Video Popup Section -----*/
