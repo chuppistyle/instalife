@@ -45,24 +45,29 @@ Table of Contents:
 @import "ionicons.min.css";
 
 @font-face {
-    font-family: Proxima Nova Light;
+    font-family: Proxima Nova;
     src: url(../fonts/ProximaNova-Light.otf);
+    font-weight: 300;
 }
 @font-face {
-    font-family: Proxima Nova Regular;
+    font-family: Proxima Nova;
     src: url(../fonts/ProximaNova-Reg.otf);
+    font-weight: 400;
 }
 @font-face {
-    font-family: Proxima Nova Bold;
+    font-family: Proxima Nova;
     src: url(../fonts/ProximaNova-Bold.otf);
+    font-weight: 700;
 }
 @font-face {
-    font-family: Proxima Nova Extra Bold;
+    font-family: Proxima Nova;
     src: url(../fonts/ProximaNova-Xbold.otf);
+    font-weight: 800;
 }
 @font-face {
-    font-family: Proxima Nova Black;
+    font-family: Proxima Nova;
     src: url(../fonts/ProximaNova-Black.otf);
+    font-weight: 900;
 }
 
 /*----- General ----*/
@@ -1601,8 +1606,11 @@ blockquote strong {
     padding-bottom: 75px;
 }
 @media (max-width:992px) {
+    section#about, section#contact, section#features, section#price-list, section#skills, section#testimonials{
+        background-repeat:repeat;
+    }
     #price-list {
-        display: none;
+        display: block;
     }
 }
 .price-list-box {
@@ -3554,4 +3562,89 @@ img {
 }
 .mt50 {
     margin-top: 50px;
+}
+
+.telephonForm{
+    text-align: center;
+}
+
+.telephonForm input {
+    font-family: 'Proxima Nova',sans-serif;
+    font-weight: 400;
+    width: 100%;
+    padding: 12.9px;
+    color: #1c1c1c;
+    background: #f2f2f2;
+    border: 1px solid #f0f0f0;
+    margin: 3px 0 24px 0;
+    -webkit-border-radius: 2px;}
+
+.telephonForm input.submit {
+    width: auto!important;
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+    letter-spacing: 1px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 16px;
+    padding-bottom: 14px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color 0.1s linear;
+    -moz-transition: background-color 0.1s linear;
+    -webkit-transition: background-color 0.1s linear;
+    -o-transition: background-color 0.1s linear;
+    box-shadow: 0 -3px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 -3px rgba(0, 0, 0, 0.1) inset;
+    -webkit-box-shadow: 0 -3px rgba(0, 0, 0, 0.1) inset;
+    -o-box-shadow: 0 -3px rgba(0, 0, 0, 0.1) inset;
+    transition: opacity 0.3s linear;
+    -moz-transition: opacity 0.3s linear;
+    -webkit-transition: opacity 0.3s linear;
+    -o-transition: opacity 0.3s linear;
+    background: #D40436;
+}
+
+.telephonForm input.submit:hover {
+    opacity: .7;
+}
+.telephonForm  input[type="submit"][disabled] { background:#888; }
+
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translateY(-50%);
+    top: 45%;}
+.modal-header {
+    padding: 115px 75px 115px 75px;
+}
+.modal-header .close {
+    margin-top: -22px;
+}
+
+.telephonForm input::-webkit-input-placeholder {
+    text-align:center;
+}
+
+.telephonForm input:-moz-placeholder { /* Firefox 18- */
+    text-align:center;
+}
+
+.telephonForm input::-moz-placeholder { /* Firefox 19+ */
+    text-align:center;
+}
+
+.telephonForm input:-ms-input-placeholder {
+    text-align:center;
 }

@@ -312,7 +312,8 @@
         var iframe = $('iframe');
         iframe.iframeTracker({
             blurCallback: function(){
-                setInterval(function(){
+
+               var timerId = setInterval(function(){
                     if (iframe.width()!== window.innerWidth && iframe !== window.innerHeight) {
                         console.log('screen');
                         $('nav').css('display','block')
@@ -321,6 +322,11 @@
                         $('nav').css('display','none')
                     }
                 }, 500);
+
+                setTimeout(function() {
+                    clearInterval(timerId);
+                    console.log( 'стоп' );
+                }, 60000);
             }
         });
     });
@@ -399,13 +405,11 @@ function initMap() {
     });
 }
 
+var closeButton = document.querySelector('button.close');
+var modalWindow = document.querySelector('#Mymodal');
+var modalContent = document.querySelector('.modal-content');
 
-function isVideoInFullscreen() {
-    var iframe = document.querySelector('iframe');
-    var one = 1;
-    setInterval(function () {
-        one++;
-        console.log(one);
-    }, 1000);
-
-}
+closeButton.addEventListener('click', function () {
+    console.log('click');
+    modalContent.classList.add('animate');
+});
