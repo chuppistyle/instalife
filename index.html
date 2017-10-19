@@ -793,14 +793,14 @@
         <!-- Modal -->
         <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content animated bounceInDown" id="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <form class="telephonForm" method="post" action="#" name="modal-form" id="modalform">
                             <fieldset>
                                 <input name="subject" type="text" id="ModalPhone" placeholder="Введите номер телефона"/>
                             </fieldset>
-                            <input type="submit" class="submit" id="Modalsubmit" value="Отправить"/>
+                            <input type="submit" data-dismiss="modal" class="submit" id="Modalsubmit" value="Отправить"/>
                         </form>
                     </div>
                 </div>

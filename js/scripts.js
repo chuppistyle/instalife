@@ -407,9 +407,9 @@ function initMap() {
 
 var closeButton = document.querySelector('button.close');
 var modalWindow = document.querySelector('#Mymodal');
-var modalContent = document.querySelector('.modal-content');
+var modalContent = document.querySelector('#modal-content');
 
 closeButton.addEventListener('click', function () {
     console.log('click');
-    modalContent.classList.add('animate');
+
 });

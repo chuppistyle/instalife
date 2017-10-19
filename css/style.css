@@ -3563,9 +3563,35 @@ img {
 .mt50 {
     margin-top: 50px;
 }
+.modal-content{
+    transition: all 1s linear;
+    visibility: visible;
+}
+.modal-header{
+    position: relative;
+    padding: 100px 75px;
 
-.telephonForm{
+}
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translateY(-50%);
+    top: 45%;
+    width: 40%;}
+
+button.close {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    margin-top: 0;
+    margin-right: -8px;
+}
+
+.telephonForm
+{
     text-align: center;
+    position: relative;
 }
 
 .telephonForm input {
@@ -3577,6 +3603,7 @@ img {
     background: #f2f2f2;
     border: 1px solid #f0f0f0;
     margin: 3px 0 24px 0;
+    text-align: center;
     -webkit-border-radius: 2px;}
 
 .telephonForm input.submit {
@@ -3613,25 +3640,18 @@ img {
     -webkit-transition: opacity 0.3s linear;
     -o-transition: opacity 0.3s linear;
     background: #D40436;
+    margin-top: 25px;
+    margin-bottom: 0;
 }
 
 .telephonForm input.submit:hover {
     opacity: .7;
+    outline: none;
+    border: none;
 }
 .telephonForm  input[type="submit"][disabled] { background:#888; }
 
-.modal.in .modal-dialog {
-    -webkit-transform: translate(0,0);
-    -ms-transform: translate(0,0);
-    -o-transform: translate(0,0);
-    transform: translateY(-50%);
-    top: 45%;}
-.modal-header {
-    padding: 115px 75px 115px 75px;
-}
-.modal-header .close {
-    margin-top: -22px;
-}
+
 
 .telephonForm input::-webkit-input-placeholder {
     text-align:center;
@@ -3648,3 +3668,4 @@ img {
 .telephonForm input:-ms-input-placeholder {
     text-align:center;
 }
+
